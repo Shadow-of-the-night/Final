@@ -19,7 +19,7 @@ class Transaction(Base):
         self.sender = sender
         self.receiver = receiver
         self.amount = amount
-        self.content = content
+        self.content = content if content is not None else "nothing"
         self.t = t if t is not None else datetime.now().timestamp()
         self.prev_hash = prev_hash
 
@@ -58,7 +58,7 @@ class Ledger(Blockchain):
 
     #根据图片转好的content进行查询 返回查询出来的创作者 如果返回0则表示图片尚未上传
     def Search_Creator(self,content):
-        creator = 0
+        creator = '0'
         for i in range(len(self.blocks)):
             for j in range(len(self.blocks[i].items)):
                 if (content == self.blocks[i].items[j].content):
